@@ -9,7 +9,7 @@ from homeassistant.components.notify import (
     BaseNotificationService
 )
 from homeassistant.const import CONF_HOST, CONF_TOKEN
-from .const import ATTR_AUTO_COPY, ATTR_BADGE, ATTR_COPY, ATTR_GROUP, ATTR_ICON, ATTR_SOUND, ATTR_URL, DATA_BARK
+from .const import ATTR_AUTO_COPY, ATTR_BADGE, ATTR_COPY, ATTR_GROUP, ATTR_ICON, ATTR_SOUND, ATTR_URL, DATA_BARK,ATTR_LEVEL
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -57,6 +57,8 @@ class BarkNotificationService(BaseNotificationService):
                         params["automaticallyCopy"] = 1
                 if (badge := data.get(ATTR_BADGE)) is not None:
                     params["badge"] = badge
+                if (level := data.get(ATTR_LEVEL)) is not None:
+                    params["level"] = level
                 if (purl := data.get(ATTR_URL)) is not None:
                     params["url"] = purl
                 if (group := data.get(ATTR_GROUP)) is not None:
